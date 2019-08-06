@@ -1,0 +1,5 @@
+# OS X files
+.DS_Store
+
+# CPP files
+*.out
