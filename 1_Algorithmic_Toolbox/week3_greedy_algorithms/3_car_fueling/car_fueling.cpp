@@ -7,8 +7,30 @@ using std::vector;
 using std::max;
 
 int compute_min_refills(int dist, int tank, vector<int> & stops) {
-    // write your code here
-    return -1;
+    stops.insert(stops.begin(), 0);
+    stops.push_back(dist);
+    // cout << "Vector: \n";
+    // for (int i = 0; i < stops.size(); i++) {
+    //     cout << stops[i] << " ";
+    // }
+    // cout << "\n";
+    int numRefills = 0;
+    int currentRefill = 0;
+    int lastRefill = 0;
+    while (currentRefill <= stops.size()) {
+        lastRefill = currentRefill;
+        while((currentRefill <= stops.size()) && (stops[currentRefill + 1] - stops[lastRefill] <= tank)) {
+            currentRefill++;
+        }
+        // cout << "Refilled at " << stops[currentRefill] << "\n";
+        if (currentRefill == lastRefill) {
+            return -1;
+        }
+        if (currentRefill <= stops.size()) {
+            numRefills++;
+        }
+    }
+    return numRefills;
 }
 
 
