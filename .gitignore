@@ -3,3 +3,6 @@
 
 # CPP files
 *.out
+
+# VS Code files
+.vscode
