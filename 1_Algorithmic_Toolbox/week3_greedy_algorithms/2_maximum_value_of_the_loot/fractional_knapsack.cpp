@@ -1,12 +1,34 @@
 #include <iostream>
 #include <vector>
+#include <cassert>
 
 using std::vector;
 
 double get_optimal_value(int capacity, vector<int> weights, vector<int> values) {
   double value = 0.0;
 
-  // write your code here
+  for(int i = 0; i < values.size(); i++) {
+    if (capacity == 0) {
+      return value;
+    }
+
+    // Select a most valuable one
+    int max_index = 0;
+    for(int j = 0; j < values.size(); j++) {
+      if (weights[j] > 0) {
+        if (((float)values[j] / (float)weights[j]) > ((float)values[max_index] / (float)weights[max_index])) {
+          max_index = j;
+        }
+      }
+    }
+
+    // Determine weight
+    int a = (capacity > weights[max_index]) ? weights[max_index] : capacity;
+    capacity -= a;
+    value += a * (float)values[max_index] / (float)weights[max_index];
+    weights[max_index] -= a;
+    
+  }
 
   return value;
 }
